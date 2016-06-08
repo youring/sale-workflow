@@ -18,17 +18,19 @@
                     <td class="works_lbl">Total Works</td>
                     <td></td>
                     <td class="works_total_hours">
-                        <span t-field="l.task_work_hours"/>
-                        <span groups="product.group_uom" t-field="uom_hour.name"/>
+                        <t t-if="l.detailed_time">
+                            <span t-field="l.task_work_hours"/>
+                            <span groups="product.group_uom" t-field="uom_hour.name"/>
+                        </t>
                     </td>
                     <td class="works_hours_price">
-                        <t t-if="l.compute_price">
+                        <t t-if="l.compute_price and l.detailed_time">
                             <span t-field="l.task_work_product_price"/>
                         </t>
                     </td>
                     <td groups="sale.group_discount_per_so_line"></td>
                     <td class="works_total_amount">
-                        <t t-if="l.compute_price">
+                        <t t-if="l.compute_price and l.detailed_time">
                             <span t-field="l.task_work_amount"
                                   t-field-options='{"widget": "monetary",
                                                     "display_currency": "o.pricelist_id.currency_id"}'/>
