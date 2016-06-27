@@ -41,7 +41,11 @@ class ProjectTask(models.Model):
         for task in self:
             all_inv = True
             invoice_ids = []
-            lines = task.mapped('work_ids.hr_analytic_timesheet_id.line_id')
+            if 'line_id' in task.work_ids._all_columns:
+                lines = task.mapped('work_ids.line_id')
+            else:
+                lines = task.mapped(
+                    'work_ids.hr_analytic_timesheet_id.line_id')
             if 'analytic_line_id' in task.material_ids._all_columns:
                 lines = lines | task.mapped('material_ids.analytic_line_id')
             for line in lines:
