@@ -48,6 +48,8 @@ class ProjectTask(models.Model):
                     'work_ids.hr_analytic_timesheet_id.line_id')
             if 'analytic_line_id' in task.material_ids._all_columns:
                 lines = lines | task.mapped('material_ids.analytic_line_id')
+            if 'service_ids' in task._all_columns:
+                lines = lines | task.service_analytic_line_ids
             for line in lines:
                 if line.invoice_id:
                     invoice_ids.append(line.invoice_id.id)
