@@ -27,6 +27,7 @@ Contributors
 ------------
 
 * Julien Coux <julien.coux@camptocamp.com>
+* Carlos Dauden <carlos.dauden@tecnativa.com>
 
 
 Maintainer

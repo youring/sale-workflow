@@ -12,9 +12,9 @@ class ProjectUserTaskSalelineMap(models.Model):
     @api.constrains('project_id', 'user_id', 'task_id',)
     def _check_unique_project_user_task(self):
         domain = [
-            ('project_id', '=', self.project_id.id or False),
-            ('user_id', '=', self.user_id.id or False),
-            ('task_id', '=', self.task_id.id or False),
+            ('project_id', '=', self.project_id.id),
+            ('user_id', '=', self.user_id.id),
+            ('task_id', '=', self.task_id.id),
             ('id', '!=', self.id),
         ]
         if self.search(domain):
@@ -25,7 +25,6 @@ class ProjectUserTaskSalelineMap(models.Model):
 
     name = fields.Char(
         compute='_compute_name',
-        readonly=True,
         store=True,
     )
 

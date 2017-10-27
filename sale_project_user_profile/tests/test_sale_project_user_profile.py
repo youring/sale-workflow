@@ -19,12 +19,14 @@ class TestSaleProjectUserProfile(TransactionCase):
         self.product_service_user_profile_1 = self.product_model.create({
             'name': 'Unittest Service User Profile 1',
             'type': 'service',
-            'track_service': 'user_profile',
+            'track_service': 'timesheet',
+            'user_profile': True,
         })
         self.product_service_user_profile_2 = self.product_model.create({
             'name': 'Unittest Service User Profile 2',
             'type': 'service',
-            'track_service': 'user_profile',
+            'track_service': 'timesheet',
+            'user_profile': True,
         })
         self.product_service_timesheet = self.product_model.create({
             'name': 'Unittest Service Timesheet',

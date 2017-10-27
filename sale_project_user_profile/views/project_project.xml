@@ -20,7 +20,7 @@
                             <field name="task_id"
                                    domain="[('project_id', '=', parent.id)]"/>
                             <field name="sale_line_id"
-                                   domain="[('order_id.project_id.project_ids', 'in', parent.id), ('product_id.type', '=', 'service'), ('product_id.track_service', '=', 'user_profile'),]"/>
+                                   domain="[('order_id.project_id.project_ids', 'in', parent.id), ('product_id.type', '=', 'service'), ('product_id.user_profile', '=', True),]"/>
                         </tree>
                         <form>
                             <group>

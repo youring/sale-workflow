@@ -8,8 +8,4 @@ from odoo import models, fields
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    track_service = fields.Selection(
-        selection_add=[
-            ('user_profile', 'User profile'),
-        ],
-    )
+    user_profile = fields.Boolean()
