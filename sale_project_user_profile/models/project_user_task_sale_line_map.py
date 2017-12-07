@@ -9,32 +9,10 @@ from odoo.exceptions import ValidationError
 class ProjectUserTaskSalelineMap(models.Model):
     _name = 'project.user.task.sale_line.map'
 
-    @api.constrains('project_id', 'user_id', 'task_id',)
-    def _check_unique_project_user_task(self):
-        domain = [
-            ('project_id', '=', self.project_id.id),
-            ('user_id', '=', self.user_id.id),
-            ('task_id', '=', self.task_id.id),
-            ('id', '!=', self.id),
-        ]
-        if self.search(domain):
-            raise ValidationError(_(
-                'A project user task mapping must be unique '
-                'by project, user and task!'
-            ))
-
     name = fields.Char(
         compute='_compute_name',
         store=True,
     )
-
-    @api.depends('user_id', 'task_id')
-    def _compute_name(self):
-        for mapping in self:
-            mapping.name = mapping.user_id.name or ''
-            if mapping.task_id:
-                mapping.name += ': ' + mapping.task_id.name
-
     project_id = fields.Many2one(
         comodel_name='project.project',
         string='Project',
@@ -54,3 +32,24 @@ class ProjectUserTaskSalelineMap(models.Model):
         string='Sale order line',
         required=True,
     )
+
+    @api.depends('user_id', 'task_id')
+    def _compute_name(self):
+        for mapping in self:
+            mapping.name = mapping.user_id.name or ''
+            if mapping.task_id:
+                mapping.name += ': ' + mapping.task_id.name
+
+    @api.constrains('project_id', 'user_id', 'task_id',)
+    def _check_unique_project_user_task(self):
+        domain = [
+            ('project_id', '=', self.project_id.id),
+            ('user_id', '=', self.user_id.id),
+            ('task_id', '=', self.task_id.id),
+            ('id', '!=', self.id),
+        ]
+        if self.search(domain):
+            raise ValidationError(_(
+                'A project user task mapping must be unique '
+                'by project, user and task!'
+            ))

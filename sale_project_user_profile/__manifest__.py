@@ -12,10 +12,6 @@
     'category': 'Project',
     'website': 'https://github.com/OCA/sale-workflow',
     'depends': [
-        'hr_timesheet',
-        'product',
-        'project',
-        'sale',
         'sale_timesheet',
     ],
     'data': [
@@ -24,5 +20,4 @@
         'views/project_project.xml',
     ],
     'installable': True,
-    'auto_install': False,
 }
