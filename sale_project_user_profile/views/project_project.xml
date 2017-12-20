@@ -18,7 +18,9 @@
                             <field name="name"/>
                             <field name="user_id"/>
                             <field name="task_id"
-                                   domain="[('project_id', '=', parent.id)]"/>
+                                   domain="[('project_id', '=', parent.id)]"
+                                   context="{'default_project_id': parent.id}"
+                            />
                             <field name="sale_line_id"
                                    domain="[('order_id.project_id.project_ids', 'in', parent.id), ('product_id.type', '=', 'service'), ('product_id.user_profile', '=', True),]"/>
                         </tree>
